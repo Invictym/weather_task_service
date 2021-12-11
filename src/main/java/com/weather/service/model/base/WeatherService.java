@@ -2,7 +2,7 @@ package com.weather.service.model.base;
 
 import java.util.Optional;
 
-public interface WeatherLoader {
+public interface WeatherService {
 
     Optional<Double> getTemperature();
 }

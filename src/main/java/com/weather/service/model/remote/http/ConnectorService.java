@@ -1,5 +1,5 @@
 package com.weather.service.model.remote.http;
 
-public interface Connector {
+public interface ConnectorService {
     String sendGet(String url);
 }

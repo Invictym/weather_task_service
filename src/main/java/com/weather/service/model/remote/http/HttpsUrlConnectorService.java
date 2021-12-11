@@ -14,13 +14,13 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 
 @Service
-public class HttpsUrlConnector implements Connector{
+public class HttpsUrlConnectorService implements ConnectorService {
 
-    private final String USER_AGENT = "Mozilla/5.0";
+    private final static String USER_AGENT = "Mozilla/5.0";
 
     public String sendGet(String url) {
-        Log.logger().info("Sending 'GET' request to URL : " + url);
-        URL obj  = null;
+        Log.logger().info("Sending 'GET' request to URL : {}" ,url);
+        URL obj;
         try {
             obj = new URL("https://" + url + ":443");
         SSLContext sslContext = SSLContext.getInstance("TLSv1.2");
@@ -31,7 +31,7 @@ public class HttpsUrlConnector implements Connector{
         con.setRequestProperty("User-Agent", USER_AGENT);
         int responseCode = con.getResponseCode();
 
-        Log.logger().info("Response Code : " + responseCode);
+        Log.logger().info("Response Code : {}", responseCode);
 
         BufferedReader in = new BufferedReader(
                 new InputStreamReader(con.getInputStream()));

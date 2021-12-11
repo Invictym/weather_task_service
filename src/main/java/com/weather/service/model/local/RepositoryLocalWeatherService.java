@@ -10,12 +10,12 @@ import java.sql.Date;
 import java.util.Optional;
 
 @Service
-public class RepositoryLocalWeather implements LocalWeather {
+public class RepositoryLocalWeatherService implements LocalWeatherService {
 
     private final WeatherRepository repository;
 
     @Autowired
-    public RepositoryLocalWeather(WeatherRepository repository) {
+    public RepositoryLocalWeatherService(WeatherRepository repository) {
         this.repository = repository;
     }
 
