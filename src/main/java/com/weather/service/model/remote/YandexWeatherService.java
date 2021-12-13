@@ -22,7 +22,7 @@ public class YandexWeatherService implements RemoteWeatherService {
     @Override
     public Optional<Double> getTemperature() {
         Log.logger().info("Get temperature from {}", url);
-        return Optional.of(YandexResponseParser
-                .getTemperatureFromResponse(connectorService.sendGet(url)));
+        return YandexResponseParser
+                .getTemperatureFromResponse(connectorService.sendGet(url));
     }
 }

@@ -12,12 +12,12 @@ import java.util.Optional;
 @RestController
 public class WeatherController {
 
-    private final RemoteWeatherService call;
+    private final RemoteWeatherService remoteWeatherService;
     private final LocalWeatherService localWeatherService;
 
     @Autowired
-    public WeatherController(RemoteWeatherService call, LocalWeatherService localWeatherService) {
-        this.call = call;
+    public WeatherController(RemoteWeatherService remoteWeatherService, LocalWeatherService localWeatherService) {
+        this.remoteWeatherService = remoteWeatherService;
         this.localWeatherService = localWeatherService;
     }
 
@@ -28,7 +28,7 @@ public class WeatherController {
             return temp.get() + "";
         }
         try {
-            Weather weather = WeatherUtil.createWeather(call.getTemperature().orElseThrow(RuntimeException::new));
+            Weather weather = WeatherUtil.createWeather(remoteWeatherService.getTemperature().orElseThrow(RuntimeException::new));
             localWeatherService.saveWeather(weather);
             return weather.getTemperature() + "";
         } catch (RuntimeException ex) {
