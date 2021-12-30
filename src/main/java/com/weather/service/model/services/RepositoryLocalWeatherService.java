@@ -1,6 +1,7 @@
-package com.weather.service.model.local;
+package com.weather.service.model.services;
 
 import com.weather.service.log.Log;
+import com.weather.service.model.services.base.LocalWeatherService;
 import com.weather.service.model.db.WeatherRepository;
 import com.weather.service.pojo.Weather;
 import org.springframework.beans.factory.annotation.Autowired;

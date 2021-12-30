@@ -1,6 +1,5 @@
-package com.weather.service.model.local;
+package com.weather.service.model.services.base;
 
-import com.weather.service.model.base.WeatherService;
 import com.weather.service.pojo.Weather;
 
 public interface LocalWeatherService extends WeatherService {

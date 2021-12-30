@@ -1,4 +1,4 @@
-package com.weather.service.model.remote.http;
+package com.weather.service.model.http;
 
 import com.weather.service.log.Log;
 import org.springframework.stereotype.Service;
@@ -14,9 +14,9 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 
 @Service
-public class HttpsUrlConnectorService implements ConnectorService {
+public class HttpsConnectorService implements HttpConnector {
 
-    private final static String USER_AGENT = "Mozilla/5.0";
+    private static final String USER_AGENT = "Mozilla/5.0";
 
     public String sendGet(String url) {
         Log.logger().info("Sending 'GET' request to URL : {}" ,url);
@@ -36,7 +36,7 @@ public class HttpsUrlConnectorService implements ConnectorService {
         BufferedReader in = new BufferedReader(
                 new InputStreamReader(con.getInputStream()));
         String inputLine;
-        final StringBuffer response = new StringBuffer();
+        final StringBuilder response = new StringBuilder();
 
         while ((inputLine = in.readLine()) != null) {
             response.append(inputLine);

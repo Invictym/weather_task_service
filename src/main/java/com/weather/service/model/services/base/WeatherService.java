@@ -1,4 +1,4 @@
-package com.weather.service.model.base;
+package com.weather.service.model.services.base;
 
 import java.util.Optional;
 
