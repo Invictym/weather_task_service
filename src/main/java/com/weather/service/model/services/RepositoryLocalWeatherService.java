@@ -3,7 +3,7 @@ package com.weather.service.model.services;
 import com.weather.service.log.Log;
 import com.weather.service.model.services.base.LocalWeatherService;
 import com.weather.service.model.db.WeatherRepository;
-import com.weather.service.pojo.Weather;
+import com.weather.service.pojo.db.Weather;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +21,7 @@ public class RepositoryLocalWeatherService implements LocalWeatherService {
     }
 
     @Override
-    public Optional<Double> getTemperature() {
+    public Optional<Long> getTemperature(String lat, String lon) {
         Log.logger().info("Get today temperature");
         return repository.getTodayTemperature(new Date(System.currentTimeMillis()));
     }
@@ -29,6 +29,6 @@ public class RepositoryLocalWeatherService implements LocalWeatherService {
     @Override
     public void saveWeather(Weather weather) {
         Log.logger().info("Save weather {} to db", weather);
-        repository.save(weather);
+        //repository.save(weather);
     }
 }

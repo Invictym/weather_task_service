@@ -17,6 +17,8 @@ Test task for junior java dev
     http://localhost:8080/weather eable enpoint(return temperature)
 
 ##In docker
+###0. Generate .mvn (if folder no presented)
+    mvn wrapper:wrapper
 ###1. Build image
     docker build --tag weather-service .
 ###2. Start application in container

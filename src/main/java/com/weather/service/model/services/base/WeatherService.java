@@ -4,5 +4,5 @@ import java.util.Optional;
 
 public interface WeatherService {
 
-    Optional<Double> getTemperature();
+    Optional<Long> getTemperature(String lat, String lon);
 }

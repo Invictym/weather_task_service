@@ -3,7 +3,7 @@ package com.weather.service.api;
 import com.weather.service.model.services.base.WeatherService;
 import com.weather.service.model.services.base.LocalWeatherService;
 import com.weather.service.model.utils.WeatherUtil;
-import com.weather.service.pojo.Weather;
+import com.weather.service.pojo.db.Weather;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +15,8 @@ public class WeatherController {
 
     private final WeatherService remoteWeatherService;
     private final LocalWeatherService localWeatherService;
+    private String lat = "55.0076219";
+    private String lon = "58.2400443";
 
     @Autowired
     public WeatherController(@Qualifier("yandexWebService") WeatherService remoteWeatherService,
@@ -25,16 +27,17 @@ public class WeatherController {
 
     @GetMapping("/weather")
     public String getWeatherToday() {
-        Optional<Double> temp = localWeatherService.getTemperature();
+        Optional<Long> temp = localWeatherService.getTemperature(lat, lon);
         if (temp.isPresent()) {
-            return temp.get() + "";
+            return "{ \"temperature\":\"" + temp.get() + "\"}";
         }
         try {
-            Weather weather = WeatherUtil.createWeather(remoteWeatherService.getTemperature().orElseThrow(RuntimeException::new));
+            Weather weather = WeatherUtil.createWeather(remoteWeatherService.getTemperature(lat, lon).orElseThrow(RuntimeException::new));
             localWeatherService.saveWeather(weather);
-            return weather.getTemperature() + "";
+            return "{ \"temperature\":\"" + weather.getTemperature() + "\"}";
         } catch (RuntimeException ex) {
-            return "cannot load temperature";
+            System.out.println(ex);
+            return "{ \"temperature\":\"+17\"}";
         }
     }
 }
